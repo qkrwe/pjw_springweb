@@ -8,6 +8,13 @@ public class Member {
     String cdate; // 가입일
     
     public Member() {
+    	
+    	
+    }
+    public Member(String email, String password, String name) {
+    	this.email = email;
+    	this.password = password;
+    	this.name = name;
     }
 
 public String getMemberId() {
@@ -44,12 +51,6 @@ public void setCdate(String cdate) {
 public String toString() {
 	return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password + ", name=" + name
 			+ ", cdate=" + cdate + "]";
-}
-
-public Member(String email, String password, String name) {
-	this.email = email;
-	this.password = password;
-	this.name = name;
 }
 
 }
