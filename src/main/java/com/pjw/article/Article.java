@@ -67,7 +67,8 @@ public class Article {
 	}
 
 	/**
-	 * \n를 <br/> 로 바꾼다.
+	 * \n를 <br/>
+	 * 로 바꾼다.
 	 */
 	public String getContentHtml() {
 		if (content != null)
@@ -77,9 +78,8 @@ public class Article {
 
 	@Override
 	public String toString() {
-		return "\nArticle [articleId=" + articleId + ", title=" + title
-				+ ", content=" + content + ", userId=" + userId + ", name="
-				+ name + ", cdate=" + cdate + ", udate=" + udate + "]";
+		return "\nArticle [articleId=" + articleId + ", title=" + title + ", content=" + content + ", userId=" + userId
+				+ ", name=" + name + ", cdate=" + cdate + ", udate=" + udate + "]";
 	}
 
 }

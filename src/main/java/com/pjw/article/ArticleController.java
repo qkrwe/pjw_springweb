@@ -23,9 +23,7 @@ public class ArticleController {
 	 * 글 목록
 	 */
 	@GetMapping("/article/list")
-	public void articleList(
-			@RequestParam(value = "page", defaultValue = "1") int page,
-			Model model) {
+	public void articleList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
 		// 페이지당 행의 수와 페이지의 시작점
 		final int COUNT = 100;
@@ -41,8 +39,7 @@ public class ArticleController {
 	 * 글 보기
 	 */
 	@GetMapping("/article/view")
-	public void articleView(@RequestParam("articleId") String articleId,
-			Model model) {
+	public void articleView(@RequestParam("articleId") String articleId, Model model) {
 		Article article = articleDao.getArticle(articleId);
 		model.addAttribute("article", article);
 	}
@@ -65,7 +62,7 @@ public class ArticleController {
 	/**
 	 * 글 등록
 	 */
-	@PostMapping("/article/add")
+	@PostMapping("/article/addform")
 	public String articleAdd(Article article, HttpSession session) {
 		// 세션에 MEMBER가 있는 지 확인
 		Object memberObj = session.getAttribute("MEMBER");
