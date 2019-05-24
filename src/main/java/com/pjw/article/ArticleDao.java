@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository
 public class ArticleDao {
 
@@ -18,6 +20,14 @@ public class ArticleDao {
 	static final String GET_ARTICLE = "select articleId, title, content, userId, name, left(cdate,16) cdate, udate from article where articleId=?";
 
 	static final String ADD_ARTICLE = "insert article(title,content,userId,name) values(?,?,?,?)";
+	
+	static final String UPDATE_ARTICLE = "UPDATE article SET title=?, content=? WHERE articleId=?";
+
+	/**
+	 * 글 삭제하는 sql
+	 */
+	static final String DELETE_ARTICLE = "DELETE FROM article WHERE articleId=?";
+	
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -52,4 +62,17 @@ public class ArticleDao {
 		return jdbcTemplate.update(ADD_ARTICLE, article.getTitle(), article.getContent(), article.getUserId(),
 				article.getName());
 	}
+	
+	public int updateArticle(Article article) {
+		return jdbcTemplate.update(UPDATE_ARTICLE, article.getTitle(),
+				article.getContent(), article.getArticleId());
+	}
+
+	/**
+	 * 글 삭제
+	 */
+	public int deleteArticle(String articleId) {
+		return jdbcTemplate.update(DELETE_ARTICLE, articleId);
+	}
+	
 }
