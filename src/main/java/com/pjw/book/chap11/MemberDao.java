@@ -22,21 +22,19 @@ public class MemberDao {
 	static final String COUNT_ALL = "SELECT count(memberId) count FROM member";
 
 	static final String SELECT_BY_LOGIN = "SELECT memberId, email, password, name FROM member WHERE (email,password) = (?,sha2(?,256))";
-	
+
 	static final String CHANGE_PASSWORD = "UPDATE member SET password=sha2(?,256) WHERE (memberId, password)=(?, sha2(?,256))";
-	
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	final RowMapper<Member> memberRowMapper = new BeanPropertyRowMapper<>(
-			Member.class);
+	final RowMapper<Member> memberRowMapper = new BeanPropertyRowMapper<>(Member.class);
 
 	/**
 	 * p.201 [리스트 8.12]의 insert() 메서드 수정. 회원 등록
 	 */
 	public void insert(Member member) {
-		jdbcTemplate.update(INSERT, member.getEmail(), member.getPassword(),
-				member.getName());
+		jdbcTemplate.update(INSERT, member.getEmail(), member.getPassword(), member.getName());
 	}
 
 	/**
@@ -57,13 +55,11 @@ public class MemberDao {
 	 * 이메일과 비밀번호로 멤버 가져오기. 로그인 할 때 사용한다.
 	 */
 	public Member selectByLogin(String email, String password) {
-		return jdbcTemplate.queryForObject(SELECT_BY_LOGIN, memberRowMapper,
-				email, password);
+		return jdbcTemplate.queryForObject(SELECT_BY_LOGIN, memberRowMapper, email, password);
 	}
-	public int changePassword(String memberId, String currentPassword,
-			String newPassword) {
-		return jdbcTemplate.update(CHANGE_PASSWORD, newPassword, memberId,
-				currentPassword);
-}
-	
+
+	public int changePassword(String memberId, String currentPassword, String newPassword) {
+		return jdbcTemplate.update(CHANGE_PASSWORD, newPassword, memberId, currentPassword);
+	}
+
 }
